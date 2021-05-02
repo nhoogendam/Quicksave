@@ -8,8 +8,8 @@ export const getReviews = () => async (dispatch) => {
         const { data } = await api.fetchReviews();
 
         dispatch({ type: 'FETCH_ALL', payload: data  })
-    } catch(err){
-        console.log(err.message);
+    } catch(error){
+        console.log(error);
     }
 };
 
@@ -19,7 +19,7 @@ export const createReview = (review) => async (dispatch) => {
 
         dispatch({ type: 'CREATE', payload: data  });
     } catch(error){
-        console.log(error.message);
+        console.log(error);
     }
 };
 
@@ -30,6 +30,6 @@ export const updateReview = (id, review) => async (dispatch) => {
         dispatch({ type : 'UPDATE', payload : data})
     }
     catch (error) {
-        console.log(error.message);
+        console.log(error);
     }
 }
