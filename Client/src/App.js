@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { getReviews } from './actions/reviews';
 import Reviews from './components/Reviews/Reviews.js';
 import Form from './components/Forms/Form.js';
+import Login from './components/Login/Login.js';
 import useStyles from './styles';
 
 const App = () => {
@@ -27,6 +28,7 @@ const App = () => {
                     <Grid container justify="space-between" alignItems="stretch" spacing={3}>
                         <Grid item xs={12} sm={4}>
                             <Form currentId = {currentId} setCurrentId = {setCurrentId} />
+                            <Login />
                         </Grid>
                         <Grid item xs={12} sm={7}>
                             <Reviews setCurrentId={setCurrentId}/>
