@@ -14,7 +14,7 @@ const Review = ({review, setCurrentId}) => {
 
     return(
         <Card className = {classes.card}>
-            <CardMedia className = {classes.media} title={review.title} />
+            <CardMedia className = {classes.media} title={review.title} component='div' />
             <div className = {classes.overlay}>
                 <Typography variant="h6">{review.gameName}</Typography>
                 <Typography variant="body2">{moment(review.createdAt).fromNow()}</Typography>
