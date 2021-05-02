@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { getReviews } from './actions/reviews';
 import Reviews from './components/Reviews/Reviews.js';
 import Form from './components/Forms/Form.js';
-import Login from './components/Login/Login.js';
+import Login from './components/Login/login.js';
 import useStyles from './styles';
 
 const App = () => {
