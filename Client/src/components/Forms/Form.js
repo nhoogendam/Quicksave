@@ -1,32 +1,49 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import useStyles from './styles';
 import { TextField, Button, Typography, Paper} from '@material-ui/core';
-import { useDispatch } from 'react-redux';
-import { createReview } from '../../actions/reviews.js';
+import { useDispatch, useSelector} from 'react-redux';
+import { createReview, updateReview } from '../../actions/reviews.js';
 
-const Form = () => {
+//Get the current Id
+
+
+const Form = ( {currentId, setCurrentId}) => {
     const classes = useStyles();
     const [reviewData, setReviewData] = useState({gameName:'', userEmail:'', reviewText:'',  rating: 0});
+    const review = useSelector((state) => (currentId ? state.reviews.find((message) => message._id === currentId) : null));
     const dispatch = useDispatch();
-        
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        if(!(reviewData.gameName === '' ||
-           reviewData.userEmail === '' ||
-           (Number.isInteger(reviewData.rating)))){
-                if(reviewData.rating > 0 && reviewData.rating <= 5)
-                    dispatch(createReview(reviewData));
-           }
-    }
+
+    useEffect(() => {
+        if(review) setReviewData(review);
+    }, [review]);
 
     const clear = () => {
-
+        setCurrentId(0);
+        setReviewData({ gameName:'', userEmail:'', reviewText:'',  rating: 0 })
     }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        if(currentId === 0){
+            if(!(reviewData.gameName === '' ||
+                reviewData.userEmail === '' ||
+                (Number.isInteger(reviewData.rating)))){
+                    if(reviewData.rating > 0 && reviewData.rating <= 5)
+                        dispatch(createReview(reviewData));
+           }
+           clear();
+        }
+        else{ 
+             dispatch(updateReview(currentId, reviewData));
+             clear();
+        }
+    };
     
     return(
         <Paper className = {classes.paper}>
              <form autoComplete="off" noValidate className={`${classes.root} ${classes.form}`} onSubmit={handleSubmit}>
-                <Typography variant="h5">Creating a Review</Typography>
+                <Typography variant="h5">{currentId ? 'Editing': 'Creating'} a memory</Typography>
                 <TextField name="gameName" required = "true" variant="outlined" label="Game" fullWidth value={reviewData.gameName} onChange={(e) => setReviewData({ ...reviewData,  gameName: e.target.value})}/>
                 <TextField name="userEmail" required = "true" variant="outlined"  label="Email" fullWidth value={reviewData.userEmail} onChange={(e) => setReviewData({ ...reviewData,  userEmail: e.target.value})}/>
                 <TextField name="reviewText"  variant="outlined" label="Review"  multiline = "true"  rows = "8" fullWidth value={reviewData.reviewText}  onChange={(e) => setReviewData({ ...reviewData,  reviewText: e.target.value})}  />

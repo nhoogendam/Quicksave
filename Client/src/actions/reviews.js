@@ -5,7 +5,7 @@ import * as api from '../api';
 export const getReviews = () => async (dispatch) => {
 
     try{
-        const { data } = await api.fetchReviews;
+        const { data } = await api.fetchReviews();
 
         dispatch({ type: 'FETCH_ALL', payload: data  })
     } catch(err){
@@ -22,3 +22,14 @@ export const createReview = (review) => async (dispatch) => {
         console.log(error.message);
     }
 };
+
+export const updateReview = (id, review) => async (dispatch) => {
+    try{
+        const {data} = await api.updateReview(id, review);
+
+        dispatch({ type : 'UPDATE', payload : data})
+    }
+    catch (error) {
+        console.log(error.message);
+    }
+}

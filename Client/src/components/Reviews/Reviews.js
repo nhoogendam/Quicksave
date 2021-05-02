@@ -5,7 +5,7 @@ import {Grid, CircularProgress } from '@material-ui/core';
 import Review from './Review/Review.js';
 import useStyles from './styles';
 
-const Reviews = () => {
+const Reviews = ({setCurrentId}) => {
     const reviews = useSelector((state) => state.reviews);
     const classes = useStyles();
     console.log(reviews);
@@ -14,7 +14,7 @@ const Reviews = () => {
             <Grid className = { classes.container } container alignItems="stretch" spacing={3}>
                 {reviews.map((review) => (
                     <Grid key={review._id} item xs={12} sm = {6}>
-                        <Review review={review} />
+                        <Review review={review} setCurrentId = {setCurrentId}/>
                     </Grid>
                 ))}
             </Grid>

@@ -12,7 +12,7 @@ app.use(cors());
 
 app.use('/reviews', reviewRoutes);
 
-const CONNECTION_URL = 'mongodb+srv://quicksaveme:quicksaveme123@cluster0.l4xql.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
+const CONNECTION_URL = 'mongodb+srv://quicksaveme:quicksaveme123@cluster0.l4xql.mongodb.net/myFirstDatabase';
 const PORT = process.env.PORT || 5000;
 
 mongoose.connect(CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true })

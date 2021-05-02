@@ -25,6 +25,7 @@ export const createReview =  async (req, res) => {
 
 export const updateReview = async( req, res) => {
     const { id: _id} = req.params;
+    const review = req.body;
 
     if(!mongoose.Types.ObjectId.isValid(_id))
         return res.status(404).send('No review with that name');
