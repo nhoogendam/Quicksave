@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {AppBar, Typography, Toolbar, Avatar, Button} from '@material-ui/core';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 import useStyles from './styles.js';
 import { useDispatch } from 'react-redux';
 
@@ -9,13 +9,14 @@ const NavBar = () => {
     const  [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
     const dispatch = useDispatch();
     const history = useHistory();
+    const location = useLocation();
 
     useEffect(() => {
         const token =  user?.token;
         //JWT
         setUser(JSON.parse(localStorage.getItem('profile')));
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [location]);
     
     const logout = () => {
         dispatch({ type: 'LOGOUT'});
