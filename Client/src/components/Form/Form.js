@@ -43,7 +43,7 @@ const Form = ( {currentId, setCurrentId}) => {
     return(
         <Paper className = {classes.paper}>
              <form autoComplete="off" noValidate className={`${classes.root} ${classes.form}`} onSubmit={handleSubmit}>
-                <Typography variant="h5">{currentId ? 'Editing': 'Creating'} a memory</Typography>
+                <Typography variant="h5">{currentId ? 'Editing': 'Creating'} a Review</Typography>
                 <TextField name="gameName" required = "true" variant="outlined" label="Game" fullWidth value={reviewData.gameName} onChange={(e) => setReviewData({ ...reviewData,  gameName: e.target.value})}/>
                 <TextField name="userEmail" required = "true" variant="outlined"  label="Email" fullWidth value={reviewData.userEmail} onChange={(e) => setReviewData({ ...reviewData,  userEmail: e.target.value})}/>
                 <TextField name="reviewText"  variant="outlined" label="Review"  multiline = "true"  rows = "8" fullWidth value={reviewData.reviewText}  onChange={(e) => setReviewData({ ...reviewData,  reviewText: e.target.value})}  />

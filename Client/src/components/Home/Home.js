@@ -2,7 +2,6 @@ import React , {useEffect, useState} from 'react';
 import { Container, Grow, Grid } from '@material-ui/core';
 import Reviews from '../Reviews/Reviews';
 import Form from '../Form/Form';
-import Login from '../Login/login';
 import { useDispatch} from 'react-redux';
 import { getReviews } from '../../actions/reviews.js';
 
@@ -23,7 +22,6 @@ const Home = () => {
                 <Grid container justify="space-between" alignItems="stretch" spacing={3}>
                     <Grid item xs={12} sm={4}>
                         <Form currentId = {currentId} setCurrentId = {setCurrentId} />
-                        <Login />
                     </Grid>
                     <Grid item xs={12} sm={7}>
                         <Reviews setCurrentId={setCurrentId}/>
