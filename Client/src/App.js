@@ -1,42 +1,23 @@
-import React, { useEffect, useState } from 'react';
-import { Container, AppBar, Typography, Grow, Grid, Button } from '@material-ui/core';
-import { useDispatch } from 'react-redux';
+import React from 'react';
+import { Container } from '@material-ui/core';
+import { BrowserRouter, Switch, Route} from 'react-router-dom';
 
-import { getReviews } from './actions/reviews';
-import Reviews from './components/Reviews/Reviews.js';
-import Form from './components/Forms/Form.js';
-import Login from './components/Login/login.js';
-import useStyles from './styles';
+import Home from './components/Home/Home';
+import Navbar from './components/Navbar/Navbar.js';
+import Auth from './components/Auth/Auth.js';
 
 const App = () => {
-    const [currentId, setCurrentId] = useState(0);
-    const classes = useStyles();
-    const dispatch = useDispatch();
-
-    useEffect(() =>{
-        dispatch(getReviews());
-    }, [currentId, dispatch]);
 
     return(
-        <Container maxWidth="lg">
-            <AppBar className = {classes.appBar} position="static" color = "inherit">
-                <Typography className = {classes.heading} variant="h2" align="center">QuickSave.Me</Typography>
-                <Button className = {classes.buttonLogin}  variant= "contained" color = "secondary" size= "small" onClick={() => {}}>Login</Button>
-            </AppBar>
-            <Grow in>
-                <Container>
-                    <Grid container justify="space-between" alignItems="stretch" spacing={3}>
-                        <Grid item xs={12} sm={4}>
-                            <Form currentId = {currentId} setCurrentId = {setCurrentId} />
-                            <Login />
-                        </Grid>
-                        <Grid item xs={12} sm={7}>
-                            <Reviews setCurrentId={setCurrentId}/>
-                        </Grid>
-                    </Grid>
-                </Container>
-            </Grow>
-        </Container>
+        <BrowserRouter>
+            <Container maxWidth="lg">
+                <Navbar/>
+                <Switch>
+                    <Route path="/" exact component = {Home} />
+                    <Route path ="/auth" exact component = {Auth} />
+                </Switch>
+            </Container>
+        </BrowserRouter>
     );
 }
 
