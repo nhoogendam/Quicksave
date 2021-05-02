@@ -6,7 +6,8 @@ import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import DeleteIcon from '@material-ui/icons/Delete';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import moment from 'moment';
-// import { useDispatch } from 'react-redux';
+
+import { deleteReview } from '../../../actions/reviews';
 
 const Review = ({review, setCurrentId}) => {
     const dispatch = useDispatch();
@@ -33,7 +34,7 @@ const Review = ({review, setCurrentId}) => {
                     Like
                     {review.likeCount}
                 </Button>
-                <Button size = "small" color="primary" onClick={() => {}}>
+                <Button size = "small" color="primary" onClick={() => dispatch(deleteReview(review._id))}>
                     <DeleteIcon fontSize = "small"/>
                     Delete
                 </Button>

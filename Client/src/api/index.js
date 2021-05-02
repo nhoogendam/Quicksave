@@ -6,5 +6,7 @@ export const fetchReviews = () => axios.get(url);
 
 export const createReview = (newReview) => axios.post(url, newReview);
 
-export const updateReview = (id, updateReview) => axios.patch('${url}/${id}', updateReview);
+export const updateReview = (id, updateReview) => axios.patch(`${url}/${id}`, updateReview);
+
+export const deleteReview = (id) => axios.delete(`${url}/${id}`);
 

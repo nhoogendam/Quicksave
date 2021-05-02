@@ -33,3 +33,13 @@ export const updateReview = (id, review) => async (dispatch) => {
         console.log(error);
     }
 }
+
+export const deleteReview = (id) => async (dispatch) => {
+    try {
+        await api.deleteReview(id);
+        
+        dispatch({ type: 'DELETE', payload: id});
+    } catch (error) {
+        console.log(error);
+    }
+}

@@ -26,8 +26,6 @@ const NavBar = () => {
         setUser(null);
     };
 
-    
-
     return (
         <AppBar className = {classes.appBar} position="static">
             <div className = {classes.brandContainer}>

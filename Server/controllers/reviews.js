@@ -31,7 +31,17 @@ export const updateReview = async( req, res) => {
     if(!mongoose.Types.ObjectId.isValid(_id))
         return res.status(404).send('No review with that name');
 
-       const updateReview = await reviewMessage.findByIdAndUpdate(_id, review, { new: true});
+       const updateReview = await ReviewMessage.findByIdAndUpdate(_id, review, { new: true});
 
        res.json(updateReview);
+}
+
+export const deleteReview = async (req, res) => {
+    const { id } = req.params;
+
+    if(!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send("No review with that Id");
+
+    await ReviewMessage.findByIdAndRemove(id);
+
+    res.json({ message: 'Post deleted successfully'});
 }
