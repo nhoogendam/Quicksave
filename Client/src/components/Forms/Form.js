@@ -25,17 +25,17 @@ const Form = ( {currentId, setCurrentId}) => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        if(currentId === 0){
-            if(!(reviewData.gameName === '' ||
-                reviewData.userEmail === '' ||
-                (Number.isInteger(reviewData.rating)))){
-                    if(reviewData.rating > 0 && reviewData.rating <= 5)
-                        dispatch(createReview(reviewData));
-           }
+        if(currentId){
+            dispatch(updateReview(currentId, reviewData));
            clear();
         }
         else{ 
-             dispatch(updateReview(currentId, reviewData));
+            if(!(reviewData.gameName === '' ||
+            reviewData.userEmail === '' ||
+            (Number.isInteger(reviewData.rating)))){
+                if(reviewData.rating > 0 && reviewData.rating <= 5)
+                    dispatch(createReview(reviewData));
+            }
              clear();
         }
     };
