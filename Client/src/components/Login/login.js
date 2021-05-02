@@ -1,5 +1,4 @@
 import React from 'react';
-import {} from '@materials-ui';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -14,19 +13,20 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
-const Login = () =>{
+const Login = () => {
     function Copyright() {
         return (
           <Typography variant="body2" color="textSecondary" align="center">
-            {'Copyright © '}
+            {'Copyright © '},
             <Link color="inherit" href="https://material-ui.com/">
               Quicksave.me
-            </Link>{' '}
-            {new Date().getFullYear()}
+            </Link>,
+            {' '},
+            {new Date().getFullYear()},
             {'.'}
           </Typography>
         );
-      }
+    }
       
       const useStyles = makeStyles((theme) => ({
         paper: {
@@ -48,7 +48,7 @@ const Login = () =>{
         },
       }));
       
-      export default function SignIn() {
+      function SignIn() {
         const classes = useStyles();
       
         return (
@@ -117,6 +117,8 @@ const Login = () =>{
           </Container>
         );
       }
-
+    return (
+      <h1>Stinky login</h1>
+    );
 }
 export default Login;
