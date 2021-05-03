@@ -1,5 +1,8 @@
 import ReviewMessage from '../models/reviewMessage.js';
 import mongoose from 'mongoose';
+import express from 'express';
+
+const router = express.Router();
 
 export const getReview = async(req, res) => {
     try{
@@ -49,22 +52,24 @@ export const deleteReview = async (req, res) => {
 export const likeReview = async (req, res) => {
     const { id } = req.params;
 
-    if(!req.userId) return res.json({ message: 'Unathenticated'});
+    if(!req.userId) return res.json({ message: 'Unauthenticated'});
 
     if(!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send('No review with that id');
 
     const review = await ReviewMessage.findById(id);
 
-    const index = review.likes.findIndex((id) => id === String(req.userId));
+    // const index = review.likes.findIndex((id) => id === String(req.userId));
 
-    if(index === -1) {
-        review.likes.push(req.userId);
-    } else{
-        review.likes = review.likes.filter((id) => id !== String(req.userId));
-    }
+    // if(index === -1) {
+    //     review.likes.push(req.userId);
+    // } else{
+    //     review.likes = review.likes.filter((id) => id !== String(req.userId));
+    // }
 
-    const updateReview = await ReviewMessage.findByIdAndUpdate(id, review, {new : true});
+    const updatedPost = await PostMessage.findByIdAndUpdate(id, { likeCount: review.likeCount + 1 }, { new: true });
 
     res.json(updateReview);
 
 }
+
+export default router;

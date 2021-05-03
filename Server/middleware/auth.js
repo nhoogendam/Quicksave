@@ -1,20 +1,18 @@
-import jwt from 'jsonwebtoken';
+import jwt, { decode } from 'jsonwebtoken';
 
 const auth = async (req, res, next) => {
     try {
         console.log(req.headers);
         const token = req.headers.authorization.split(" ")[1];
         const isCustomAuth = token.length < 500;
-
-        let decodeData;
         
         if( token && isCustomAuth){ 
-            decodeData = jwt.verify(token, 'test');
+            let decodeData = jwt.verify(token, 'test');
 
             req.userId = decodedData?.id;
         }
         else{
-            decodeData = jwt.decode(token);
+            let decodeData = jwt.decode(token);
 
             req.userId = decodedData?.sub;
         }
