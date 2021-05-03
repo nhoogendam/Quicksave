@@ -9,7 +9,7 @@ import { createReview, updateReview } from '../../actions/reviews.js';
 
 const Form = ( {currentId, setCurrentId}) => {
     const classes = useStyles();
-    const [reviewData, setReviewData] = useState({gameName:'', reviewText:'',  rating: 0});
+    const [reviewData, setReviewData] = useState({gameName:'', userEmail: '', reviewText:'',  rating: 0});
     const review = useSelector((state) => (currentId ? state.reviews.find((message) => message._id === currentId) : null));
     const dispatch = useDispatch();
     const user = JSON.parse(localStorage.getItem('profile'));
@@ -20,7 +20,7 @@ const Form = ( {currentId, setCurrentId}) => {
 
     const clear = () => {
         setCurrentId(0);
-        setReviewData({ gameName:'', reviewText:'',  rating: 0 })
+        setReviewData({ gameName:'', userEmail: '', reviewText:'',  rating: 0 })
     }
 
     const handleSubmit = (e) => {
@@ -29,16 +29,16 @@ const Form = ( {currentId, setCurrentId}) => {
         console.log(reviewData);
 
         if(currentId){
-            dispatch(updateReview(currentId, { ...reviewData, userEmail: user?.result?.userEmail }));
+            dispatch(updateReview(currentId, reviewData));
             clear();
         }
         else{ 
-            // if(!(reviewData.gameName === '' ||
-            // reviewData.userEmail === '' ||
-            // (!Number.isInteger(reviewData.rating)))){
-            //     if(reviewData.rating > 0 && reviewData.rating <= 5)
-                    dispatch(createReview({ ...reviewData, userEmail: user?.result?.userEmail }));
-            // }
+            if(!(reviewData.gameName === '' ||
+            reviewData.userEmail === '' ||
+            (!Number.isInteger(reviewData.rating)))){
+                if(reviewData.rating > 0 && reviewData.rating <= 5)
+                    dispatch(createReview(reviewData));
+            }
             clear();
         }
     };
@@ -47,15 +47,15 @@ const Form = ( {currentId, setCurrentId}) => {
         setReviewData({...reviewData, rating: val});
     }
 
-    if(!user?.result?.email){
-        return(
-            <Paper className={classes.paper}>
-                <Typography variant="h6" align="center">
-                    Please Sign In to create your own reviews and like other's reviews.
-                </Typography>
-            </Paper>
-        )
-    };
+    // if(!user?.result?.email){
+    //     return(
+    //         <Paper className={classes.paper}>
+    //             <Typography variant="h6" align="center">
+    //                 Please Sign In to create your own reviews and like other's reviews.
+    //             </Typography>
+    //         </Paper>
+    //     )
+    // };
 
     
     return(
@@ -63,6 +63,7 @@ const Form = ( {currentId, setCurrentId}) => {
              <form autoComplete="off" noValidate className={`${classes.root} ${classes.form}`} onSubmit={handleSubmit}>
                 <Typography variant="h5">{currentId ? 'Editing': 'Creating'} a Review</Typography>
                 <TextField name="gameName" required = "true" variant="outlined" label="Game" fullWidth value={reviewData.gameName} onChange={(e) => setReviewData({ ...reviewData, gameName: e.target.value})}/>
+                <TextField name="userEmail" required = "true" variant="outlined"  label="Email" fullWidth value={reviewData.userEmail} onChange={(e) => setReviewData({ ...reviewData, userEmail: e.target.value})}/>
                 <TextField name="reviewText"  variant="outlined" label="Review"  multiline = "true"  rows = "8" fullWidth value={reviewData.reviewText}  onChange={(e) => setReviewData({ ...reviewData, reviewText: e.target.value})}/>
                 {/*<TextField name="rating"  variant="outlined" label="Rating"   fullWidth value={reviewData.rating}  onChange={(e) => setReviewData({ ...reviewData,  rating: e.target.value})}  />*/}
                 <Slider name="rating" label="Rating" step={1} defaultValue={1} min={1} max={5} marks={true} valueLabelDisplay='auto' onChangeCommitted={setRating} />

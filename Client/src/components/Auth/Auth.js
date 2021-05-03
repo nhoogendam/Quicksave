@@ -58,9 +58,6 @@ const initialState = {firstName:'', lastName:'', email:'', password:'', confirmP
         console.log('Google Sign In was unsuccessful. Try Again Later');
     };
 
-    
-
-
     return (
             <Container component="main" maxWidth="xs">
                 <Paper className = {classes.paper} elevation={3}>

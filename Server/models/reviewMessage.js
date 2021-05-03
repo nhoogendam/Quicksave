@@ -5,9 +5,9 @@ const reviewSchema = mongoose.Schema({
     userEmail: String,
     reviewText: String,
     rating: Number,
-    likes: {
-        type: [String],
-        default: [],
+    likeCount: {
+        type: Number,
+        default: 0,
     },
     createdAt: {
         type: Date,
