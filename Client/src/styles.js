@@ -13,6 +13,11 @@ export default makeStyles(() => ({
   heading: {
     color: 'rgba(0,183,255, 1)',
   },
+  bottomCenter: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    marginBottom: 30
+},
   image: {
     marginLeft: '15px',
   },

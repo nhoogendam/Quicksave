@@ -1,5 +1,5 @@
 todo:
-- finish 0Auth stuff [https://youtu.be/LKlO8vLvUao?t=2654]
+- finish 0Auth stuff [https://youtu.be/LKlO8vLvUao?t=8133]
 - need to pull in the IGDB info
 - make a main page.
     - modularize

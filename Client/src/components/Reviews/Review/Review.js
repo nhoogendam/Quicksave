@@ -7,7 +7,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import moment from 'moment';
 
-import { deleteReview } from '../../../actions/reviews';
+import { deleteReview, likeReview } from '../../../actions/reviews';
 
 const Review = ({review, setCurrentId}) => {
     const dispatch = useDispatch();
@@ -18,7 +18,11 @@ const Review = ({review, setCurrentId}) => {
             <CardMedia className = {classes.media} title={review.title} component='div' />
             <div className = {classes.overlay}>
                 <Typography variant="h6">{review.gameName}</Typography>
-                <Typography variant="body2">{moment(review.createdAt).fromNow()}</Typography>
+            
+            <CardActions className={classes.cardActions}>
+                <Typography variant="h7">{review.userEmail} </Typography>
+                <Typography variant="h7">{review.rating} / 5</Typography>
+            </CardActions>
             </div>
             <div className={classes.overlay2}>
                 <Button style={{color: "white"}} size="small" onClick = {() => setCurrentId(review._id)}>
@@ -26,14 +30,15 @@ const Review = ({review, setCurrentId}) => {
                 </Button>
             </div>
             <div className = {classes.details}>
-                <Typography variant="body2" color="textSecondary">{review.reviewText}</Typography>
+                <Typography variant="body2" style={{color: "black"}} >{review.reviewText}</Typography>
             </div>
             <CardActions className= {classes.cardActions}>
-                <Button size = "small" color="primary" onClick={() => {}}>
+                <Button size = "small" color="primary" onClick={() =>dispatch(likeReview(review._id))}>
                     <ThumbUpAltIcon fontSize = "small"/>
-                    Like
+                    Like &nbsp;
                     {review.likeCount}
                 </Button>
+                <Typography variant="body2" style={{color: "grey"}}>{moment(review.createdAt).fromNow()}</Typography>
                 <Button size = "small" color="primary" onClick={() => dispatch(deleteReview(review._id))}>
                     <DeleteIcon fontSize = "small"/>
                     Delete

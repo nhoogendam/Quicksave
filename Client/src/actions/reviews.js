@@ -43,3 +43,15 @@ export const deleteReview = (id) => async (dispatch) => {
         console.log(error);
     }
 }
+
+export const likeReview = (id) => async (dispatch) => {
+    try {
+
+        const { data } = await api.likeReview(id);
+
+        dispatch({ type: 'UPDATE', payload: data });
+
+    } catch (error) {
+        console.log(error);        
+    }
+}
