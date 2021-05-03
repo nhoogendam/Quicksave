@@ -1,12 +1,14 @@
 import React from 'react';
-import { Container } from '@material-ui/core';
+import { Container, Typography } from '@material-ui/core';
 import { BrowserRouter, Switch, Route} from 'react-router-dom';
+import useStyles from './styles';
 
 import Home from './components/Home/Home';
 import Navbar from './components/Navbar/Navbar.js';
 import Auth from './components/Auth/Auth.js';
 
 const App = () => {
+    const classes = useStyles();
 
     return(
         <BrowserRouter>
@@ -18,6 +20,7 @@ const App = () => {
                 </Switch>
             </Container>
         </BrowserRouter>
+        
     );
 }
 

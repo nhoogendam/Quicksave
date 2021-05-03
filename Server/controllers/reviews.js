@@ -14,7 +14,7 @@ export const getReview = async(req, res) => {
 export const createReview =  async (req, res) => {
     const review = req.body;
 
-    const newReview = new ReviewMessage(review);
+    const newReview = new ReviewMessage({ ...review, creator: req.userId, createdAt: new Date().toISOString()});
     try{
         await newReview.save();
         res.status(201).json(newReview);
@@ -44,4 +44,27 @@ export const deleteReview = async (req, res) => {
     await ReviewMessage.findByIdAndRemove(id);
 
     res.json({ message: 'Post deleted successfully'});
+}
+
+export const likeReview = async (req, res) => {
+    const { id } = req.params;
+
+    if(!req.userId) return res.json({ message: 'Unathenticated'});
+
+    if(!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send('No review with that id');
+
+    const review = await ReviewMessage.findById(id);
+
+    const index = review.likes.findIndex((id) => id === String(req.userId));
+
+    if(index === -1) {
+        review.likes.push(req.userId);
+    } else{
+        review.likes = review.likes.filter((id) => id !== String(req.userId));
+    }
+
+    const updateReview = await ReviewMessage.findByIdAndUpdate(id, review, {new : true});
+
+    res.json(updateReview);
+
 }

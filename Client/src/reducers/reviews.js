@@ -4,6 +4,7 @@ export default (reviews = [], action) => {
         case 'DELETE':
             return reviews.filter((review) => review._id !== action.payload);
         case 'UPDATE':
+        case 'LIKE':
             return reviews.map((review) => review._id === action.payload._id ? action.payload : review);
         case 'FETCH_ALL':
             return action.payload;

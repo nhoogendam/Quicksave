@@ -7,6 +7,7 @@ import reducers from './reducers';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+//import { Typography } from '@material-ui/core'
 
 const store = createStore(reducers, compose(applyMiddleware(thunk)));
 
@@ -14,6 +15,8 @@ ReactDOM.render(
   <React.StrictMode>
   	<Provider store={store}>
     	<App />
+      {//<Typography variant="body2"  align = 'center' gutterBottom = 'true' style={{color: "grey", alignItems : "flex-end"}} >Nathan's Website ™</Typography> 
+      }
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')
