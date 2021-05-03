@@ -1,9 +1,9 @@
-import express from 'express';
+// import express from 'express';
 
-import { searchGame } from '../controllers/games.js';
+// import { searchGame } from '../controllers/games.js';
 
-const router = express.Router();
+// const router = express.Router();
 
-router.get('/game', searchGame);
+// router.get('/game', searchGame);
 
-export default router;
+// export default router;
