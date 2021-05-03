@@ -1,10 +1,11 @@
 import igdb from 'igdb-api-node';
 //import * as config from './config.json';
+import config from './config.js';
+//const { twitch_id, twitch_token } = require('./config.json');
 
-const { twitch_id, twitch_token } = require('./config.json');
-const client = igdb(twitch_id, twitch_token);
+const client = igdb(config.twitch_id, config.twitch_token);
 
-export const searchGames = (searchTerm, resultLimit) => async (dispatch) => {
+export const searchGame = async (res, req) => {
 	const response = await client
 		.fields('name,game')
 		.limit(resultLimit)

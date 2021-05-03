@@ -4,6 +4,7 @@ import cors from 'cors';
 
 import reviewRoutes from './routes/reviews.js';
 import userRoutes from './routes/users.js';
+import gameRoutes from './routes/games.js';
 
 const app = express();
 
@@ -13,6 +14,7 @@ app.use(cors());
 
 app.use('/reviews', reviewRoutes);
 app.use('/users', userRoutes);
+app.use('/games', gameRoutes);
 
 const CONNECTION_URL = 'mongodb+srv://quicksaveme:quicksaveme123@cluster0.l4xql.mongodb.net/myFirstDatabase';
 const PORT = process.env.PORT || 5000;
