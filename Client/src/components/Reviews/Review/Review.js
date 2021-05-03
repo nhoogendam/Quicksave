@@ -20,8 +20,8 @@ const Review = ({review, setCurrentId}) => {
                 <Typography variant="h6">{review.gameName}</Typography>
             
             <CardActions className={classes.cardActions}>
-                <Typography variant="h7">{review.userEmail} </Typography>
-                <Typography variant="h7">{review.rating} / 5</Typography>
+                <Typography variant="subtitle2">{review.userEmail} </Typography>
+                <Typography variant="subtitle2">{review.rating} / 5</Typography>
             </CardActions>
             </div>
             <div className={classes.overlay2}>
